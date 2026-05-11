@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pipeworx-io/unpaywall",
+  "title": "Unpaywall",
+  "description": "Unpaywall MCP — open-access lookup for scholarly papers (free, no key)",
+  "version": "0.1.0",
+  "websiteUrl": "https://pipeworx.io/packs/unpaywall",
+  "repository": {
+    "url": "https://github.com/pipeworx-io/mcp-unpaywall",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gateway.pipeworx.io/unpaywall/mcp"
+    }
+  ]
+}
