@@ -2,12 +2,20 @@
 
 Unpaywall MCP — open-access paper lookup, no API key (polite-pool email).
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1476+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1679+ live data sources.
 
 ## Tools
 
-- `get_oa(doi)` — OA status + best free legal copy for a DOI.
-- `search_papers(query, is_oa?, page?)` — keyword search, optionally OA-only.
+- `get_oa(doi)` — OA status + best free legal copy for a DOI, including author names (`z_authors` → `raw_author_name`).
+
+Unpaywall also documents a title-search endpoint (`/v2/search`) — it is NOT
+exposed here. As of 2026-09-07 it 500s on every query against the live API,
+regardless of query text, `is_oa`, `page`, or a trailing slash on the path.
+Unpaywall's help docs (redirected from support.unpaywall.org into OpenAlex's
+help center as part of the 2025/2026 "Walden" rebuild) still describe the URL
+shape, so it is not formally retired — but it is non-functional in production
+with no fix timeline, and a tool that always errors costs every caller a
+wasted call to discover that. Removed 2026-09-07 (fleet #1328).
 
 ## Auth
 
@@ -64,9 +72,45 @@ directly, instead of just this one's:
 }
 ```
 
-Both URLs reach the same gateway and the same 1476+ data sources. The
+Both URLs reach the same gateway and the same 1679+ data sources. The
 only difference is which pack's tools are listed **directly**; `ask_pipeworx`
 reaches all of them from either one.
+
+## No MCP client? Call it over HTTP
+
+```bash
+curl -X POST https://gateway.pipeworx.io/v1/tools/get_oa \
+  -H 'Content-Type: application/json' \
+  -d '{"doi":"10.1038/nature12373"}'
+```
+
+No account needed for the first calls. Inspect any tool: `GET https://gateway.pipeworx.io/v1/tools/get_oa`. Find one: `POST https://gateway.pipeworx.io/v1/tools/search_packs` with `{"query":"..."}`.
+
+## Standalone (no gateway account)
+
+This package also runs as a local stdio MCP server — no Pipeworx account, no
+gateway round-trip:
+
+```json
+{
+  "mcpServers": {
+    "unpaywall": {
+      "command": "npx",
+      "args": ["-y", "@pipeworx/mcp-unpaywall"]
+    }
+  }
+}
+```
+
+Or run it directly to confirm it starts:
+
+```bash
+npx -y @pipeworx/mcp-unpaywall
+```
+
+It speaks MCP over stdin/stdout and answers `initialize`/`tools/list`/`tools/call`
+for **only** this pack's tools — none of the shared meta-tools the gateway
+connection above adds. Same source, same tools, no ask_pipeworx routing.
 
 ## Using with ask_pipeworx
 
@@ -87,13 +131,3 @@ The gateway picks the right tool and fills the arguments automatically.
 ## License
 
 MIT
-
-## No MCP client? Call it over HTTP
-
-```bash
-curl -X POST https://gateway.pipeworx.io/v1/tools/get_oa \
-  -H 'Content-Type: application/json' \
-  -d '{"doi":"10.1038/nature12373"}'
-```
-
-No account needed for the first calls. Inspect any tool: `GET https://gateway.pipeworx.io/v1/tools/get_oa`. Find one: `POST https://gateway.pipeworx.io/v1/tools/search_packs` with `{"query":"..."}`.
