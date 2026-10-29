@@ -1,0 +1,18 @@
+[
+  {
+    "name": "get_oa",
+    "description": "Given a DOI, fetch open-access status and the best free legal copy if one exists. Returns is_oa, oa_status (gold | green | hybrid | bronze | closed), best location (URL, host type, license), and journal metadata.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "doi": {
+          "type": "string",
+          "description": "DOI (e.g., \"10.1038/nature12373\")"
+        }
+      },
+      "required": [
+        "doi"
+      ]
+    }
+  }
+]
