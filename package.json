@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-unpaywall",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Unpaywall MCP — open-access lookup for scholarly papers (free, no key)",
   "type": "module",
   "main": "lib/index.js",
@@ -27,7 +27,7 @@
     "mode": "gateway",
     "slug": "unpaywall",
     "gatewaySlug": "unpaywall",
-    "sourceHash": "v1-d9084050190aef2bb83f9fafcd6416593c93d54dd9d38ebe10845b67d9aa1fb3",
-    "sourceCommit": "98853f34516646cb7c4c1460f09249b262c0269e"
+    "sourceHash": "v1-f9aa02e8c0a40b14fa7be09208bbbece6e696046c5261f41438b42794b601dc8",
+    "sourceCommit": "ca52e7ed1e1ccad897c2da1b0fa105edc0bc3b2e"
   }
 }

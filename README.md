@@ -2,7 +2,7 @@
 
 Unpaywall MCP — open-access paper lookup, no API key (polite-pool email).
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1857+ live data sources. This is an independent, unofficial integration — not affiliated with, endorsed by, or published by the upstream provider.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1866+ live data sources. This is an independent, unofficial integration — not affiliated with, endorsed by, or published by the upstream provider.
 
 ## Tools
 
@@ -26,7 +26,7 @@ Unpaywall requires a contact email as a polite-pool identifier.
 
 ## Data source
 
-`https://api.unpaywall.org/v2/` — public, email-identified.
+Unpaywall — public, email-identified.
 
 ## Quick Start
 
@@ -72,7 +72,7 @@ directly, instead of just this one's:
 }
 ```
 
-Both URLs reach the same gateway and the same 1857+ data sources. The
+Both URLs reach the same gateway and the same 1866+ data sources. The
 only difference is which pack's tools are listed **directly**; `ask_pipeworx`
 reaches all of them from either one.
 
